@@ -1,0 +1,14 @@
+doctype html
+html
+  head
+    title Ask me HowTo
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  body
+    = render 'layouts/header'
+    = render 'search/search_form'
+    .container
+      p.notice = notice
+      p.alert = alert
+      = yield

@@ -1,0 +1,10 @@
+= nested_form_for @question, data: {type: :json} do |f|
+  p
+    = f.label :title
+    = f.text_field :title
+  p
+    = f.label :body
+    = f.text_area :body
+
+  p= render 'layouts/shared/attachment_form', f: f
+  p= f.submit 'Create', class: 'btn btn-large btn-primary'

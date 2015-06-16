@@ -1,0 +1,4 @@
+div id="#{resource.class.name.downcase}-comments"
+  - resource.comments.each do |comment|
+    - if comment.persisted?
+      = render comment

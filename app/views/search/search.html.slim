@@ -1,0 +1,6 @@
+.search-results
+  - if @found_resources
+    - @found_resources.each do |resource|
+      = render resource
+  - else
+    | nothing was found

@@ -1,0 +1,12 @@
+header.navbar.navbar-fixed-top.navbar-inverse
+  .navbar-inner
+    .container
+      = link_to 'Ask me how to', root_path, id: 'logo'
+      nav
+        ul.nav.nav-pills.pull-right
+          li= link_to 'Questions', questions_path
+          -if user_signed_in?
+            li= link_to 'Sign out', destroy_user_session_path, method: :delete
+          - else
+            li= link_to 'Sign in', new_user_session_path
+            li= link_to 'Register', new_user_registration_path

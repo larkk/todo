@@ -1,0 +1,6 @@
+= form_for :search, url: search_path, method: :get do |f|
+  .form-group
+    = f.text_field :q, placeholder: 'Search'
+  .form-group
+    = f.select :filter_option, filter_options << 'Everywhere'
+    = f.submit 'Search'

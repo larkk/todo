@@ -1,0 +1,26 @@
+div id="question-#{@question.id}"
+  p.bold
+    a href=@question.path =@question.title
+  p= @question.body
+  p
+    - if @question.user.id == @question.current_user_id
+      .delete
+        a href=@question.path data-remote="true" rel="nofollow" data-method="delete" Delete
+      .edit
+        a href="" class="edit-question-link" data-question-id=@question.id Edit
+    p
+      form action=@question.path id="edit-question-#{@question.id}" class="edit_question"  data-remote="true" method="post" accept-charset="UTF-8"
+        input name="utf8" type="hidden" value="✓"
+        input type="hidden" name="_method" value="patch"
+
+        .question-errors
+
+        label for="question_title" Title
+        input type="text" name="question[title]" id="question_title" value=@question.title
+
+        label for="question_body" Question
+        textarea name="question[body]" id="question_body" =@question.body
+
+        input type="submit" name="commit" value="Save"
+
+        == "#{ JST['templates/attachments_list']({resource: @question}) }"

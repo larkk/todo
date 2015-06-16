@@ -1,0 +1,15 @@
+.votes
+  .votes-total
+    p
+      | Total rating:
+      = resource.total_votes
+
+  - if can?(:unvote, resource)
+    .unvote
+      p= link_to 'unvote', eval("unvote_#{resource.class.to_s.downcase}_path(resource)"), method: :patch, data: { type: :json }, remote: true
+  - if can?(:vote_up, resource)
+    .vote-up
+      p= link_to 'vote up', eval("vote_up_#{resource.class.to_s.downcase}_path(resource)"), method: :patch, data: { type: :json }, remote: true
+  - if can?(:vote_down, resource)
+    .vote-down
+      p= link_to 'vote down', eval("vote_down_#{resource.class.to_s.downcase}_path(resource)"), method: :patch, data: { type: :json }, remote: true

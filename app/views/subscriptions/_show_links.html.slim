@@ -1,0 +1,6 @@
+.subscription
+  - if can?(:create, Subscription) && !question.followed_by(current_user)
+    = link_to 'Subscribe', question_subscriptions_path(question), remote: true, method: :post
+  - if can?(:destroy, @subscription) && question.followed_by(current_user)
+    = link_to 'Unsubscribe', question_subscription_path(question, @subscription), method: :delete, remote: true
+

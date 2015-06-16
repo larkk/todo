@@ -1,0 +1,8 @@
+= nested_form_for [@question, @answer], remote: true, html: { id: 'create-answer-form' } do |f|
+  p
+    .answer-errors
+    = f.label :body, 'Your answer'
+    = f.text_area :body, id: 'create-answer-body'
+
+  p= render 'layouts/shared/attachment_form', f: f
+  p= f.submit 'Create answer'

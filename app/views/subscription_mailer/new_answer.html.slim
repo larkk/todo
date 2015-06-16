@@ -1,0 +1,5 @@
+AuthorMailer#new_answer
+
+p There is a new answer to:
+= link_to question_url(@answer.question), @answer.question.title
+p= @answer.body

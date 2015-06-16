@@ -1,0 +1,17 @@
+.votes
+  .votes-total
+    p
+      | Total rating:
+      = @resource.total_votes
+  - if @resource.user_signed_in and (@resource.user.id != @resource.current_user_id)
+    - if @resource.voted
+      .unvote
+        p
+          a href=@resource.unvote_path data-type="json" data-remote="true" rel="nofollow" data-method="patch" unvote
+    - else
+      .vote-up
+        p
+          a href=@resource.vote_up_path data-type="json" data-remote="true" rel="nofollow" data-method="patch" vote up
+      .vote-down
+        p
+          a href=@resource.vote_down_path data-type="json" data-remote="true" rel="nofollow" data-method="patch" vote down

@@ -1,0 +1,10 @@
+-if @resource.attachments.length > 0
+  ul
+    -for attachment in @resource.attachments
+      div class="file-#{attachment.id}"
+        li
+          a href=attachment.file_url
+            = attachment.file_name
+            -if @resource.user.id == @resource.current_user_id
+              p
+                a href=attachment.path data-remote='true' data-method='delete' Delete file

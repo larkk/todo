@@ -1,0 +1,30 @@
+div id="answer-#{answer.id}"
+  - if answer.best
+    div id='best-answer'
+  p= answer.body
+
+  = render 'layouts/shared/votes', resource: answer
+  = render 'layouts/shared/attachments_list', resource: answer
+
+  - if can?(:set_the_best, answer)
+    = link_to 'Best', set_the_best_answer_path(answer), method: :patch, remote: true
+
+  p
+    - if can?(:destroy, answer)
+      .delete
+        = link_to 'Delete answer', answer_path(answer), method: :delete, remote: true
+    - if can?(:update, answer)
+      .edit
+        = link_to 'Edit', '', class: 'edit-answer-link', data: { answer_id: answer.id }
+      p
+        .edit-answer-errors
+        = nested_form_for answer, remote: true, data: { type: :json }, html: { id: "edit-answer-#{answer.id}" } do |f|
+          p
+            = f.label :body, 'Answer'
+            = f.text_area :body
+            = render 'layouts/shared/attachments_list', resource: answer
+          p
+            = f.submit 'Save'
+
+  p= render 'comments/index', resource: answer
+  p= render 'comments/form', resource: answer

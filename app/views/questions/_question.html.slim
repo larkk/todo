@@ -1,0 +1,22 @@
+div id="question-#{question.id}"
+  p.bold= link_to question.title, question_path(question)
+  p= question.body
+  p
+    - if can?(:destroy, question)
+      .delete
+        = link_to 'Delete', question_path(question), method: :delete, remote: true
+    - if can?(:update, question)
+      .edit
+        = link_to 'Edit', '', class: 'edit-question-link',  data: { question_id: question.id }
+      p
+        = form_for question, remote: true, html: { id: "edit-question-#{question.id}" } do |f|
+          .question-errors
+          = f.label :title
+          = f.text_field :title
+
+          = f.label :body, 'Question'
+          = f.text_area :body
+
+          = f.submit 'Save'
+
+          = render 'layouts/shared/attachments_list', resource: question

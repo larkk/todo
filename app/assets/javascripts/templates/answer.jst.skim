@@ -1,0 +1,31 @@
+div id="answer-#{@answer.id}"
+  -if @answer.best
+    div id="best-answer"
+  p= @answer.body
+
+  == "#{ JST['templates/votes']({resource: @answer})}"
+  == "#{ JST['templates/attachments_list']({resource: @answer})}"
+
+  - if @answer.user.id == @answer.current_user_id
+    .delete
+      a href=@answer.path data-remote="true" rel="nofollow" data-method="delete" Delete answer
+    .edit
+      a class="edit-answer-link" data-answer-id=@answer.id href="" Edit
+
+    .edit-answer-errors
+
+    form id="edit-answer-#{@answer.id}" class="edit_answer" data-type="json" action=@answer.path accept-charset="UTF-8" data-remote="true" method="post"
+      input name="utf8" type="hidden" value="✓"
+      input type="hidden" name="_method" value="patch"
+      p
+        label for="answer_body" Answer
+        textarea id="answer_body" name="answer[body]" =@answer.body
+      -if @answer.attachments.length > 0
+        | Attachments:
+        ul
+          -for attachment in @answer.attachments
+            div class="file-#{attachment.id}"
+              li
+                a href=attachment.file_url
+                  = attachment.file_name
+      input type="submit" name="commit" value="Save"

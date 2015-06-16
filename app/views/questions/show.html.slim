@@ -1,0 +1,20 @@
+.question data={ question_id: @question.id }
+  h1= @question.title
+  p= @question.body
+
+  p= render 'subscriptions/show_links', question: @question
+
+  p= render 'layouts/shared/votes', resource: @question
+  P= render 'layouts/shared/attachments_list', resource: @question
+
+  p= render 'comments/index', resource: @question
+  p= render 'comments/form', resource: @question
+
+.answers
+  p= render 'answers/index'
+
+.create-answer
+  p= render 'answers/form'
+
+= subscribe_to "/questions/#{@question.id}/answers"
+= subscribe_to "/questions/#{@question.id}/comments"

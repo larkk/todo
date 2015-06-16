@@ -1,0 +1,6 @@
+DailyMailer#digest
+
+= @greeting + ", here is the list of recently asked questions:"
+
+- @questions.each do |question|
+  = link_to question.title, question_url(question)

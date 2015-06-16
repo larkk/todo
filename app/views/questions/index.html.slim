@@ -1,0 +1,7 @@
+h1 Questions
+
+.questions
+  = render 'questions/questions'
+.ask-question-link
+  -if user_signed_in?
+    p= link_to 'Ask question', new_question_path
